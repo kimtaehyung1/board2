@@ -28,7 +28,7 @@
 		insert into BOARD
 		(num, NAME,password, title,content
 		,read_count, write_date,ref,step,depth,show,realnum)
-		values(NUM.NEXTVAL,#{name},#{password},#{title},#{content},0,sysdate,num.currval,0,0,'y',num.currval)
+		values(NUM.NEXTVAL,#{name},#{password},#{title},#{content},0,sysdate,num.currval,0,0,'y',num.currval)   
 	</insert>
 <!-- 삭제 -->
 	<!-- <delete id="Realdelete" parameterType="BoardVO">

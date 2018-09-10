@@ -18,6 +18,7 @@ public class InsertBoardController {
 	synchronized public String InsertBoard(BoardVO vo)throws Exception{
 		
 		insertBoardService.insert(vo);
+		System.out.println("진짜 번호"+vo.getRealnum());
 		System.out.println("등록페이지"+vo.toString());
 		return "redirect:list.do";
 	}

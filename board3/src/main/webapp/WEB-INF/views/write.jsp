@@ -15,7 +15,7 @@
 		</div>
 		<form name="insert" method="post" action="insert.do"
 			onsubmit="return check()">
-
+			
 			<table width="20%" class="insert-table" border="1px">
 				<tbody>
 					<tr>

@@ -29,11 +29,8 @@ public class DeleteBoardController {
 		System.out.println("삭제됩니다~");
 		boolean pc ;
 		int count = deleteBoardService.passCheck(vo);
-	
-		//BoardVO bvo = service.detailBoard(num);
 		
 		System.out.println("count"+count);
-		//System.out.println("bvo"+bvo.getDel());
 		Map<Object,Object> map = new HashMap<Object,Object>();
 		if(count == 1) {
 			pc = true;
@@ -46,15 +43,12 @@ public class DeleteBoardController {
 		}
 		return map;
 	}
-	
-
 	/*@RequestMapping(value="/delete.do", method=RequestMethod.POST)
 	@ResponseBody
 	public void delete(BoardVO vo,Model model) {
 	 
 		deleteBoardService.delete(vo);
 		System.out.println("삭제됩니다~");
-		
 	}*/
 	@RequestMapping(value="/PassCheck.do", method=RequestMethod.GET)
 	public ModelAndView passcheckGet(BoardVO vo) {
@@ -65,7 +59,6 @@ public class DeleteBoardController {
 	mav.addObject("vo",vo);
 	return mav;	
 }
-	
 	/*@RequestMapping(value="/PassCheck.do", method=RequestMethod.POST)
 	public @ResponseBody Map<Object,Object> passcheckPost(BoardVO vo,int num) {
 		
@@ -80,7 +73,6 @@ public class DeleteBoardController {
 		if(count == 1) {
 			pc = true;
 			map.put("pc", pc);
-			
 			//deleteBoardService.delete(vo);
 			//System.out.println("삭제");
 		}else {
