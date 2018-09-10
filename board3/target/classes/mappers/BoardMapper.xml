@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.board.mapper.BoardMapper">
+
+<!-- 리스트  -->
+	<select id="select" resultType="BoardVO">
+		<include refid="pagingheader"></include>
+		select dense_rank() over(order by ref)rank, a.* from 
+		(select (select count(*) from comments where num = b.num  )as comment_count, b.* from  board b
+		<include refid="search"></include>
+		) a order by ref desc, step
+		<include refid="pagingfooter"></include>
+	</select>
+	<!-- 페이징 윗부분-->
+	<sql id="pagingheader">
+		select * from
+		(select rownum rnum, r.* from
+		(
+	</sql>
+	<!-- 페이징 아랫부분 -->
+	<sql id="pagingfooter">
+		) r )where rnum between #{start} and #{end} 
+	</sql>
+	<!--  등록 -->
+	<insert id="insert">
+		insert into BOARD
+		(num, NAME,password, title,content
+		,read_count, write_date,ref,step,depth,show,realnum)
+		values(NUM.NEXTVAL,#{name},#{password},#{title},#{content},0,sysdate,num.currval,0,0,'y',num.currval)
+	</insert>
+<!-- 삭제 -->
+	<!-- <delete id="Realdelete" parameterType="BoardVO">
+		delete from board where num =
+		#{num}
+	</delete>  --> 
+	<!--  삭제(update 삭제하였습니다 보여주기 ) -->
+	 <update id="delete">    
+		update board set show = 'n'  where num = #{num}
+	</update>
+	<!-- 상세화면 -->
+	<select id="detailBoard" resultType="BoardVO">
+		select * from
+		(select rownum rnum,r.* from(select dense_rank() over(order by ref)rank,a.*
+		from
+		(select * from board )a
+		order by num desc,step)r)where num = #{num}
+	</select>
+	<!-- 조회수 증가 -->
+	<update id="viewCount">
+		update board set READ_COUNT = read_count +1 where num=#{num}
+	</update>
+	<!-- 수정 -->
+	<update id="update" parameterType="BoardVO">
+		update board
+		set
+		name = #{name},
+		password = #{password},
+		title = #{title},
+		content = #{content}
+		where num
+		= #{num}
+	</update>
+	
+	<select id="selectUpdate" resultType="BoardVO">
+		select * from board where
+		num = #{num}
+	</select>
+	<!-- 검색 -->
+	<sql id="search">
+		<choose>
+			<when test="search_option == 'all'">
+				where
+				name like '%'||#{keyword}||'%'
+				or title like
+				'%'||#{keyword}||'%'
+				or content like '%'||#{keyword}||'%'
+			</when>
+			<otherwise>
+				where ${search_option} like '%'||#{keyword}||'%'
+			</otherwise>
+		</choose>
+	</sql>
+	<!-- 전체 게시글 수 -->
+	<select id="countArticle" resultType="int">
+		select count(*) from board
+		<include refid="search"></include>
+	</select>
+	<!-- 비밀번호체크 -->
+	<select id="passCheck" resultType="int">
+		select count(*) from board
+		where num = #{num} and password = #{password}
+	</select>
+	<!-- 수정비밀번호체크 -->
+	<select id="updateCheck" resultType="int">
+		select count(*) from board
+		where num = #{num} and password = #{password}
+	</select>
+	<!-- 정렬 답글(step)로 먼저 쓴 글 순서 정해주는 쿼리 -->
+	<update id="reviewUpdate" parameterType="BoardVO">
+		update board set step = step +1 where ref = #{ref } and step > #{step }
+	</update>
+	<!-- 답글 등록 -->
+	<insert id="reviewinsert">
+		insert into BOARD
+		(num, NAME,password, title,content
+		,read_count, write_date,ref,step,depth,show,realnum)
+		values(NUM.NEXTVAL,#{name},#{password},#{title},#{content},0,sysdate,#{ref},#{step}+1,#{depth}+1,'y',num.currval)
+	</insert>
+	<!-- 댓글 갯수 -->
+	<select id="commentCount" resultType="int">
+		select count(*) from comments where num=#{num}
+	</select>
+	<!-- 댓글 등록 -->
+	<insert id="commentInsert">
+		insert into comments
+		(comment_num,num,NAME,password,content,comment_date,ref,step,depth)
+		values(comment_num.NEXTVAL,#{num},#{name},#{password},#{content},sysdate,comment_num.currval,0,0)
+	</insert>
+	<!-- 댓글 리스트 -->
+	<select id="commentSelect" resultType="CommentVO">
+		select * from
+		(select rownum rnum, r.* from
+		(
+select dense_rank() over(order by ref)rank, a.* from 
+		(select  c.* from  comments c
+		) a order by ref desc, step ) r ) where num = #{num}
+	</select>
+	<!-- 댓글 수정 -->
+	<update id="commentUpdate">
+		update comments set 
+		name = #{name},
+		content = #{content},
+		password = #{password}
+		
+		where comment_num
+		= #{comment_num}
+	</update>
+	<!-- 댓글 삭제 -->
+	<delete id="commentDelete" parameterType="CommentVO">
+		delete from comments where comment_num = #{comment_num}
+	</delete>
+	<!-- 댓글 비밀번호 체크 -->
+	<select id="commentPassCheck" resultType="int">
+		select count(*) from comments
+		where comment_num = #{comment_num} and password = #{password}
+	</select>
+	<!-- 대댓글 정렬 먼저 쓴글 순서 정해주는 쿼리 -->
+	<update id="commentCommentUpdate" parameterType="BoardVO">
+		update comments set step = step +1 where ref = #{ref } and step > #{step }
+	</update>
+	<!-- 대댓글 -->
+	<insert id="cocomentInsert">
+		insert into comments
+		(comment_num,num ,NAME,password,content
+		,comment_date,ref,step,depth)
+		values(comment_num.NEXTVAL,#{num},#{name},#{password},#{content},sysdate,#{ref},#{step}+1,#{depth}+1)
+	</insert>
+
+</mapper>
+
+

@@ -1,0 +1,146 @@
+@charset "UTF-8";
+
+b{
+	font-size: 13px;
+	
+}
+.div_list {
+	text-align: center;
+}
+
+.div_list2 {
+	text-align: center;
+	margin-left: 415px;
+}
+
+.div-top {
+	border: 3px double black;
+	width: 557px;
+	margin: auto;
+}
+
+.div-m-1 {
+	height: 50px;
+	border: 1px dotted black;
+}
+
+.div-1 {
+	width: 70px;
+	height: 50px;
+	float: left;
+	border-right: 1px dotted black;
+	background-color: lightgray;
+	padding-left: 10px;
+}
+
+.div-1-2 {
+	border-right: 1px dotted black;
+	width: 194px;
+	height: 50px;
+	float: left;
+	padding-left: 10px;
+}
+
+.div-2 {
+	border-right: 1px dotted black;
+	width: 90px;
+	height: 50px;
+	float: right;
+	background-color: lightgray;
+	padding-left: 10px;
+}
+
+.div-2-2 {
+	width: 158px;
+	height: 50px;
+	float: right;
+	padding-left: 10px;
+}
+
+.div-m-2 {
+	height: 50px;
+	border: 1px dotted black;
+}
+
+.div-m-3 {
+	height: 50px;
+	border: 1px dotted black;
+	padding-top: 15px;
+}
+
+.div-3 {
+	width: 80px;
+	height: 50px;
+	float: left;
+}
+
+.div-4 {
+	border: 1px dotted black;
+	padding: 10px;
+}
+
+.button {
+	margin-bottom: 10px;
+	margin-left: 420px;
+}
+
+.input_update {
+	margin-top: 10px;
+}
+
+.content {
+	margin-top: 3px;
+	float: left;
+	font-size: 15px;
+	resize: none;
+	width: 93%;
+	height: auto;
+	overflow-y: hidden; /* prevents scroll bar flash */
+	padding: 1.1em; /* prevents text jump on Enter keypress */
+	padding-bottom: 0.2em;
+	line-height: 1.6;
+}
+
+.xmp {
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	word-break: break-all;
+	font-size: 21px;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.pre {
+	word-wrap: break-word;
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.comment {
+	width: 425px;
+    height: 14px;
+    padding: 5px;
+    margin-left: 5px;
+	margin-bottom: 20px;
+}
+
+.comment_name {
+	width: 130px;
+	height: 13px;
+	padding: 5px;
+	margin-left: 5px;
+	font-style: italic;
+	margin-bottom: 10px;
+}
+
+.comment_password {
+	width: 150px;
+	height: 13px;
+	padding: 5px;
+	margin-left: 5px;
+	font-style: italic;
+	margin-bottom: 10px;
+}
+input.btn.btn-default{
+	    height: 28px;
+}

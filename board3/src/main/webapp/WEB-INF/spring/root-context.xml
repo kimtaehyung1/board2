@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:c="http://www.springframework.org/schema/c" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-4.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- DataSource 설정 -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource"
+		id="dataSource">
+		<property value="oracle.jdbc.driver.OracleDriver" name="driverClassName" />
+		<property value="jdbc:oracle:thin:@localhost:1521:XE" name="url" />
+		<property value="test" name="username" />
+		<property value="tiger" name="password" />
+	</bean>
+	<!-- sqlsessionFactory 객체 설정 -->
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="SqlSessionFactory">
+		<property name="dataSource" ref="dataSource" />
+		
+		<!-- mybatis-config.xml이 스프링 시작될때 같이 실행되도록 설정하기  -->
+		<property value="classpath:mybatis-config.xml" name="configLocation" />
+		<!-- XML Mapper 인식하게 설정 -->
+		<property value="classpath:/mappers/**/*Mapper.xml" name="mapperLocations" />
+	</bean>
+	
+	
+	<!-- SQLSessionTemplate설정하기 DAO인터페이스를 만들었기때문에 Mybatis에서 DAO인터페이스를 구현하기위해서 필요한작업 -->
+	<bean  class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession" destroy-method="clearCache">
+    <constructor-arg name="sqlSessionFactory" ref="SqlSessionFactory" />
+    </bean>
+
+	
+	
+</beans>

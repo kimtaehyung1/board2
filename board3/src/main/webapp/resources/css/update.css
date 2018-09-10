@@ -1,0 +1,109 @@
+@charset "UTF-8";
+
+tr {
+	height: 50px;
+}
+
+.insert-table {
+
+    margin: auto;
+	width: 550px;
+}
+
+.insert_name {
+	float: left;
+	margin-right: 42px;
+	margin-left: 10px;
+}
+
+.insert_title {
+	float: left;
+	margin-right: 42px;
+	margin-left: 10px;
+	
+}
+
+.insert_password {
+	float: left;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+
+.insert_content {
+	float: left;
+	margin-right: 10px;
+	margin-left: 10px;
+	height: 40px;
+	margin-top: 10px;
+}
+
+.insert_input {
+	float: left;
+	resize: none;
+	height: 20px;
+}
+.name_input{
+	float: left;
+	resize: none;
+	height: 20px;
+	margin-left: 20px;
+}
+.title_input{
+	float: left;
+	resize: none;
+	height: 20px;
+	margin-left: 20px;
+	width: 380px;
+}
+.text_input {
+	float: left;
+	font-size: 15px;
+	resize: none;
+	width: 93%;
+	height: 250px;
+	 
+      padding: 1.1em;
+      padding-bottom: 0.2em;
+      line-height: 1.6; 
+}
+
+.div_list {
+	height: 30px;
+	margin-bottom: 3px;
+	text-align: center;	
+	margin-left: 475px;
+}
+
+.input_cancel {
+	margin-top: 5px;
+}
+
+.arrow_box {
+	display: none;
+	position: absolute;
+	padding: 16px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	background: #333;
+	color: #fff;
+}
+
+.arrow_box:after {
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	width: 0;
+	height: 0;
+	margin-left: -10px;
+	border: solid transparent;
+	border-color: rgba(51, 51, 51, 0);
+	border-bottom-color: #333;
+	border-width: 10px;
+	pointer-events: none;
+	content: " ";
+}
+
+span:hover+p.arrow_box {
+	display: block;
+}

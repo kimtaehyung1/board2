@@ -1,0 +1,69 @@
+@charset "EUC-KR";
+
+pre {
+	font-size: 17px;
+	overflow: hidden;
+
+	text-overflow: ellipsis;
+	text-align: left;
+}
+p{
+	 margin-top: 0;
+    margin-bottom: 0;
+}
+.pre_name{
+	text-align: center;
+}
+ 
+.table {
+	border: 3px double black;
+	width: 65%;
+	text-align: center;
+	margin-top: 10px;
+}
+
+tr {
+	height: 50px;
+}
+
+td.result {
+	text-align: center;
+	text-decoration: none;
+}
+.result_title{
+	text-decoration: none;
+	text-align: left;
+
+}
+
+.td_a_title {
+	padding-left: 10px;
+  	text-decoration: none;
+	
+}
+
+.list_button_input {
+	
+	height: 30px;
+}
+
+.div_top {
+	height: 30px;
+}
+
+.div_save {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.label_count {
+	font-size: 10px;
+	color: red;
+	margin-top: 20px;
+
+}
+
+.label_count_b {
+	font-size: 10px;
+	color: red;
+}
